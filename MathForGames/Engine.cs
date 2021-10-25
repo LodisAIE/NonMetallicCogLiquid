@@ -12,7 +12,7 @@ namespace MathForGames
     {
         private static bool _applicationShouldClose = false;
         private static int _currentSceneIndex;
-        private Scene[] _scenes = new Scene[0];
+        private static Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
 
         /// <summary>
@@ -49,6 +49,12 @@ namespace MathForGames
             End();
         }
 
+        public static void RemoveActorFromScene(Actor actor)
+        {
+            _scenes[_currentSceneIndex].RemoveActor(actor);
+            actor.End();
+        }
+
         /// <summary>
         /// Called when the application starts 
         /// </summary>
@@ -66,7 +72,7 @@ namespace MathForGames
             Enemy actor = new Enemy('A', 100, 5, 60, 100, 1, Color.RED, player, "Actor");
             actor.CollisionRadius = 20;
             //UI section
-            UIText text = new UIText(10, 10, "TestTextBox", Color.BLUE, 70, 70, 15, "This is test text. \nIt is not to be taken seriously as it is only a test.\nAnyone who says this isn't a test is lying and should be ignored.");
+            UIText text = new UIText(10, 10, "TestTextBox", Color.BLUE, 70, 70, 15, "You win!");
 
             actor.SpeechText = text;
             scene.AddUIElement(text);
